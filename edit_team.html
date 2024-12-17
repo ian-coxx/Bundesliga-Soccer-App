@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Team</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Edit Team: {{ team['Team'] }}</h1>
+    </header>
+
+    <form method="POST">
+      <label for="team_name">Team Name:</label>
+      <input
+        type="text"
+        name="team_name"
+        value="{{ team['Team'] }}"
+        required
+      /><br />
+
+      <label for="fotmob_team_rating">FotMob Team Rating:</label>
+      <input
+        type="number"
+        name="fotmob_team_rating"
+        value="{{ team['FotMob_Team_Rating'] }}"
+        step="any"
+        required
+      /><br />
+
+      <label for="matches">Matches Played:</label>
+      <input
+        type="number"
+        name="matches"
+        value="{{ team['Matches'] }}"
+        required
+      /><br />
+
+      <input type="submit" value="Update Team" />
+    </form>
+
+    <br />
+    <a href="{{ url_for('modify_teams') }}">Back to Teams</a>
+  </body>
+</html>

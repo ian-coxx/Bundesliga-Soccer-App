@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1>Team Data from Selected Table</h1>
+    </header>
+
+    <section>
+      <h2>Select a Team Data Table</h2>
+      <form action="{{ url_for('teams_data') }}" method="POST">
+        <label for="table">Choose a table:</label>
+        <select name="table" id="table" required>
+          {% for table in team_tables %}
+            <option value="{{ table }}" {% if table == selected_table %}selected{% endif %}>
+              {{ table.replace('_', ' ').capitalize() }}
+            </option>
+          {% endfor %}
+        </select>
+        <button type="submit">Load Data</button>
+      </form>
+
+      {% if result %}
+        <h3>{{ result.error }}</h3>
+      {% endif %}
+
+      {% if rows %}
+        <h3>Data from Table: {{ selected_table.replace('_', ' ').capitalize() }}</h3>
+        <table>
+          <thead>
+            <tr>
+              {% for column in columns %}
+                <th>{{ column }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+              <tr>
+                {% for value in row %}
+                  <td>{{ value }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+      {% endif %}
+    </section>
+
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>

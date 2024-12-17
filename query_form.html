@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Query Database</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Query the Bundesliga Database</h1>
+    </header>
+
+    <section>
+      <h2>Search Players by Column</h2>
+      <form method="POST" action="/query">
+        <label for="column">Select Column:</label>
+        <select name="column" id="column" required>
+          <option value="Player">Player Name</option>
+          <option value="Team">Team</option>
+          <option value="Goals">Goals</option>
+          <option value="Penalties">Penalties</option>
+          <option value="Minutes">Minutes</option>
+          <option value="Matches">Matches</option>
+          <option value="Country">Country</option></select
+        ><br /><br />
+
+        <label for="value">Enter Value:</label>
+        <input type="text" name="value" id="value" required /><br /><br />
+
+        <input type="submit" value="Search" />
+      </form>
+
+      {% if results %}
+      <h3>Query Results</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Goals</th>
+            <th>Penalties</th>
+            <th>Minutes</th>
+            <th>Matches</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in results %}
+          <tr>
+            <td>{{ row['Player'] }}</td>
+            <td>{{ row['Team'] }}</td>
+            <td>{{ row['Goals'] }}</td>
+            <td>{{ row['Penalties'] }}</td>
+            <td>{{ row['Minutes'] }}</td>
+            <td>{{ row['Matches'] }}</td>
+            <td>{{ row['Country'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </section>
+
+    <section>
+      <h2>Search Top Players or Teams by Ratings</h2>
+      <form method="POST" action="/query">
+        <label for="category">Select Category:</label>
+        <select name="category" id="category" required>
+          <option value="players">Players</option>
+          <option value="teams">Teams</option></select
+        ><br /><br />
+
+        <label for="top_n">Top N:</label>
+        <select name="top_n" id="top_n" required>
+          <option value="1">Top 1</option>
+          <option value="3">Top 3</option>
+          <option value="5">Top 5</option>
+          <option value="10">Top 10</option></select
+        ><br /><br />
+
+        <input type="submit" value="Search Rankings" />
+      </form>
+
+      {% if results %}
+      <h3>Top Rankings Results</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in results %}
+          <tr>
+            <td>{{ row['Name'] }}</td>
+            <td>{{ row['Team'] }}</td>
+            <td>{{ row['Rating'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </section>
+
+    <br />
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>

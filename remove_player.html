@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remove Player</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Remove A Player</h1>
+    </header>
+
+    <section>
+      <h2>Players in the Bundesliga</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Team</th>
+            <th>Goals</th>
+            <th>Penalties</th>
+            <th>Minutes</th>
+            <th>Matches</th>
+            <th>Country</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in player_info %}
+          <tr>
+            <td>{{ player['Player'] }}</td>
+            <td>{{ player['Team'] }}</td>
+            <td>{{ player['Goals'] }}</td>
+            <td>{{ player['Penalties'] }}</td>
+            <td>{{ player['Minutes'] }}</td>
+            <td>{{ player['Matches'] }}</td>
+            <td>{{ player['Country'] }}</td>
+            <td>
+              <form action="{{ url_for('remove_player') }}" method="POST">
+                <input
+                  type="hidden"
+                  name="player_name"
+                  value="{{ player['Player'] }}"
+                />
+                <button type="submit">Remove</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <br />
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>

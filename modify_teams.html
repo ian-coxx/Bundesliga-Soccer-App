@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modify Teams</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Modify a Team</h1>
+    </header>
+    <section>
+      <h2>Teams in the Bundesliga</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>FotMob Rating</th>
+            <th>Matches Played</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for team in teams %}
+          <tr>
+            <td>{{ team['Team'] }}</td>
+            <td>{{ team['FotMob_Team_Rating'] }}</td>
+            <td>{{ team['Matches'] }}</td>
+            <td>
+              <form
+                action="{{ url_for('edit_team', team_name=team['Team']) }}"
+                method="GET"
+              >
+                <button type="submit">Edit</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    <br />
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>

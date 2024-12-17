@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bundesliga Soccer App</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img
+          src="{{ url_for('static', filename='images/bundesliga_logo.jpg') }}"
+          alt="Bundesliga Logo"
+          width="100"
+        />
+        <h1>Bundesliga Soccer App</h1>
+        <ul>
+          <li>
+            <form action="{{ url_for('players_data') }}" method="get">
+              <button type="submit">Players Data</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('teams_data') }}" method="get">
+              <button type="submit">Teams Data</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('add_team') }}" method="get">
+              <button type="submit">Add New Team</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('remove_team') }}" method="get">
+              <button type="submit">Remove a Team</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('add_player') }}" method="get">
+              <button type="submit">Add a Player</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('remove_player') }}" method="get">
+              <button type="submit">Remove a Player</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('team_stats') }}" method="get">
+              <button type="submit">Calculate Team Stats</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('player_stats') }}" method="get">
+              <button type="submit">Calculate Player Stats</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('modify_teams') }}" method="get">
+              <button type="submit">Modify Team</button>
+            </form>
+          </li>
+          <li>
+            <form action="{{ url_for('query_database') }}" method="get">
+              <button type="submit">Query Database</button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </body>
+</html>

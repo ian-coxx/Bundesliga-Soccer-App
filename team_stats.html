@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Team Statistics</h1>
+    </header>
+
+    <section>
+        <h2>Select the Statistic and Table to Calculate</h2>
+        <form action="{{ url_for('team_stats') }}" method="POST">
+            <label for="table">Choose a table:</label>
+            <select name="table" id="table" required>
+                <option value="possession_percentage_team" {% if selected_table == 'possession_percentage_team' %}selected{% endif %}>Team's by Possession %</option>
+                <option value="team_goals_per_match" {% if selected_table == 'team_goals_per_match' %}selected{% endif %}>Team Goals Per Match</option>
+                <option value="team_ratings" {% if selected_table == 'team_ratings' %}selected{% endif %}>Team Ratings</option>
+                <option value="total_red_card_team" {% if selected_table == 'total_red_card_team' %}selected{% endif %}>Total Red Cards by Team</option>
+            </select>
+
+            <label for="stat">Choose a statistic:</label>
+            <select name="stat" id="stat" required>
+                <option value="mean" {% if selected_stat == 'mean' %}selected{% endif %}>Mean</option>
+                <option value="min" {% if selected_stat == 'min' %}selected{% endif %}>Min</option>
+                <option value="max" {% if selected_stat == 'max' %}selected{% endif %}>Max</option>
+                <option value="median" {% if selected_stat == 'median' %}selected{% endif %}>Median</option>
+                <option value="std_dev" {% if selected_stat == 'std_dev' %}selected{% endif %}>Standard Deviation</option>
+            </select>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result %}
+        <h3>Results for {{ selected_stat.capitalize() }}:</h3>
+        <ul>
+            {% for field, value in result.items() %}
+                <li><strong>{{ field }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if plot_url %}
+        <h3>Visualization of the Key Metric ({{ selected_stat.capitalize() }}):</h3>
+        <img src="{{ plot_url }}" alt="Team Stats Plot" style="width: 80%; height: auto;" class="center">
+        {% endif %}
+    </section>
+
+    <br>
+    <form action="{{ url_for('index') }}" method="GET">
+        <button type="submit">Back to Home</button>
+    </form>
+</body>
+</html>

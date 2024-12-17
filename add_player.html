@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add A Player</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Add A Player</h1>
+    </header>
+    <form method="POST">
+      Player Name: <input type="text" name="player" required /><br />
+      Team: <input type="text" name="team" required /><br />
+      Goals: <input type="number" name="goals" required /><br />
+      Penalties:
+      <input type="number" name="penalties" required /><br />
+      Minutes:
+      <input type="number" name="minutes" required /><br />
+      Matches:
+      <input type="number" name="matches" required /><br />
+      Country:
+      <input type="text" name="country" required /><br />
+      FotMob Rating:
+      <input type="number" name="fotmob_rating" step="any" required /><br />
+      Player Match Awards: <input type="number" name="player_match_awards"
+      step=="any" required /><br />
+      Expected Goals:
+      <input type="number" name="expected_goals" step="any" required /><br />
+      Tackles per 90:
+      <input type="number" name="tackles_per_90" required /><br />
+      Tackle Success Rate:
+      <input type="number" name="tackle_success_rate" required /><br />
+      <input type="submit" value="Add Player" />
+    </form>
+    <br />
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>

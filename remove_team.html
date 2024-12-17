@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remove Team</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Remove a Team</h1>
+    </header>
+
+    <section>
+      <h2>Teams in the Bundesliga</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>FotMob Rating</th>
+            <th>Matches Played</th>
+            <th>Possession Percentage</th>
+            <th>Goals per Match</th>
+            <th>Total Goals Scored</th>
+            <th>Red Cards</th>
+            <th>Yellow Cards</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for team in team_info %}
+          <tr>
+            <td>{{ team['Team'] }}</td>
+            <td>{{ team['FotMob_Team_Rating'] }}</td>
+            <td>{{ team['Matches'] }}</td>
+            <td>{{ team['Possession_Percentage'] }}</td>
+            <td>{{ team['Goals_per_Match'] }}</td>
+            <td>{{ team['Total_Goals_Scored'] }}</td>
+            <td>{{ team['Red_Cards'] }}</td>
+            <td>{{ team['Yellow_Cards'] }}</td>
+            <td>
+              <form action="{{ url_for('remove_team') }}" method="POST">
+                <input
+                  type="hidden"
+                  name="team_name"
+                  value="{{ team['Team'] }}"
+                />
+                <button type="submit">Remove</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <br />
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>

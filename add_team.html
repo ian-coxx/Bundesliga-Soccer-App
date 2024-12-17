@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Team</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Add New Team</h1>
+    </header>
+    <form method="POST">
+      Team Name: <input type="text" name="team_name" required /><br />
+      FotMob Rating: <input type="number" name="fotmob_rating" required /><br />
+      Matches: <input type="number" name="matches" required /><br />
+      Goals Per Match:
+      <input type="number" name="goals_per_match" required /><br />
+      Total Goals Scored:
+      <input type="number" name="total_goals_scored" required /><br />
+      Possession Percentage (Don't Enter "%"):
+      <input type="number" name="possession" step="any" required /><br />
+      Red Cards:
+      <input type="number" name="red_cards" step="any" required /><br />
+      Yellow Cards:
+      <input type="number" name="yellow_cards" step="any" required /><br />
+      <input type="submit" value="Add Team" />
+    </form>
+    <br />
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back to Home</button>
+    </form>
+  </body>
+</html>
